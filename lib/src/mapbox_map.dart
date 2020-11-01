@@ -223,7 +223,11 @@ class _MapboxMapState extends State<MapboxMap> {
         if (_controller.isCompleted) {
           widget.onStyleLoadedCallback();
         } else {
-          _controller.future.then((_) => widget.onStyleLoadedCallback());
+          _controller.future.then((_) {
+            if (widget.onStyleLoadedCallback != null) {
+              widget.onStyleLoadedCallback();
+            }
+          });
         }
       },
         onMapClick: widget.onMapClick,
